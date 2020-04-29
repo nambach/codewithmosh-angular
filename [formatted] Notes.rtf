@@ -1,0 +1,293 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset238 Calibri;}{\f2\fnil\fcharset163 Calibri;}{\f3\fnil\fcharset163 Consolas;}{\f4\fnil\fcharset0 Consolas;}{\f5\fnil\fcharset238 Consolas;}}
+{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+\pard\sl240\slmult1\qc\b\f0\fs32\lang9 ANGULAR FUNDAMENTAL\par
+
+\pard\sl240\slmult1\b0\fs22\par
+\b\fs28 1. One-way Binding:\par
+\b0\fs22 D\'f9ng data load l\'ean c\'e1c HTML component, nh\f1\u432?ng thay \'f0\f2\lang1066\u7893?i component tr\f0\lang1033\'ean UI (e.g: nh\f2\lang1066\u7853?p m\u7897?t gi\f0\lang1033\'e1 tr\f2\lang1066\u7883? g\f0\lang1033\'ec \f1\'f0\f0\'f3 v\'e0o input) th\'ec data (bi\f2\lang1066\u7871?n) b\f0\lang1033\'ean d\f1\u432?\f2\lang1066\u7899?i code kh\f0\lang1033\'f4ng \f1\'f0\f2\lang1066\u7893?i.\par
+\par
+\b\i String Interpolation\par
+\b0\i0   syntax: "\{\{ variable \}\}"\par
+  e.g: \f3\fs20 <img url="\{\{ imageUrl \}\}" />\par
+
+\pard\sl240\slmult1\tx8640\f2\fs22\par
+
+\pard\sl240\slmult1\b\i Property Binding \par
+\b0\i0   syntax: [property]="variable"\par
+  e.g: \f3\fs20 <img [url]="imageUrl" />\par
+\f2\fs22\par
+\b\i Attribute Binding\par
+\b0\i0   Ph\f0\lang1033\'e2n bi\f2\lang1066\u7879?t HTML v\f0\lang1033\'e0 DOM: HTML l\'e0 th\f2\lang1066\u7875? hi\u7879?n c\u7911?a DOM d\f1\u432?\f2\u7899?i d\u7841?ng text - HTML l\f0\lang1033\'e0 markup language, DOM l\'e0 th\f2\lang1066\u7913? t\u7891?n t\u7841?i d\f1\u432?\f2\u7899?i b\u7897? nh\u7899?. Do \f1\'f0\f0\lang1033\'f3 m\f2\lang1066\u7895?i property c\u7911?a HTML s\u7869? map v\u7899?i 1 property t\f1\u432?\u417?ng \f2\u7913?ng c\u7911?a DOM, nh\f1\u432?ng v\f0\lang1033\'ec hai th\f2\lang1066\u7913? n\f0\lang1033\'e0y (HTML & DOM) kh\'f4ng ph\f2\lang1066\u7843?i l\f0\lang1033\'e0 m\f2\lang1066\u7897?t, n\f0\lang1033\'ean c\'f3 nh\f2\lang1066\u7919?ng tr\f1\u432?\f2\u7901?ng h\u7907?p ngo\u7841?i l\u7879? HTML c\f0\lang1033\'f3 property n\'e0y nh\f1\u432?ng DOM kh\f0\'f4ng c\'f3 property t\f1\u432?\u417?ng \f2\lang1066\u7913?ng. Do \f1\'f0\f0\lang1033\'f3 kh\'f4ng th\f2\lang1066\u7875? binding b\u7857?ng "Property Binding" hay "String Interpolation" \f1\'f0\u432?\f2\u7907?c, m\f0\lang1033\'e0 ph\f2\lang1066\u7843?i d\f0\lang1033\'f9ng syntax \f1\'f0\f2\lang1066\u7863?c bi\u7879?t: th\f0\lang1033\'eam ti\f2\lang1066\u7873?n t\u7889? "attr." v\f0\lang1033\'e0o tr\f1\u432?\f2\lang1066\u7899?c t\f0\lang1033\'ean property\par
+\f4\fs20   e.g: <table><tr><td [colspan]="colspan"> column </td></tr></table>   ERROR!!\par
+       <table><tr><td [attr.colspan]="colspan"> column </td></tr></table>   CORRECT\par
+\f0\fs22\par
+\b\i Class Binding\par
+\b0\i0\f4\fs20   e.g: <button class="btn btn-primary" [class.active]="true">Save</button>\par
+\f0\fs22     S\f2\lang1066\u7869? \f1\'f0\u432?\f2\u7907?c render th\f0\lang1033\'e0nh \par
+\f4\fs20        <button class="btn btn-primary active">Save</button>\par
+\f0\fs22\par
+\b\i Style Binding\par
+\b0\i0\f4\fs20   e.g: <div [style.backgroundColor]="isCorrect ? 'green' : 'red'"/>\par
+\f0\fs22\par
+\b\i Shadow DOM - ViewEncapsulation:\par
+\b0\i0   N\f2\lang1066\u7871?u m\u7897?t component \f1\'f0\f2\u7883?nh ngh\f1\u297?a style ngay trong file html c\f2\u7911?a n\f0\lang1033\'f3 b\f2\lang1066\u7857?ng th\u7867? <style>, theo c\f1\u417? ch\f2\u7871? th\f0\lang1033\'f4ng th\f1\u432?\f2\lang1066\u7901?ng, style \f1\'f0\f0\lang1033\'f3 s\f2\lang1066\u7869? b\u7883? "r\f0\lang1033\'f2 r\f2\lang1066\u7881?" (bleeding) ra b\f0\lang1033\'ean ngo\'e0i - ngh\f1\u297?a l\f0\'e0 nh\f2\lang1066\u7919?ng element c\u7911?a component kh\f0\lang1033\'e1c c\f1\u361?ng s\f2\lang1066\u7869? b\u7883? d\f0\lang1033\'ednh style \f1\'f0\f0\'f3 n\f2\lang1066\u7871?u c\f0\lang1033\'f3 c\'f9ng selector. M\f2\lang1066\u7897?t s\u7889? browser cung c\u7845?p c\f1\u417? ch\f2\u7871? "Shadow DOM" \f1\'f0\f2\u7875? \f1\'f0\f0\lang1033\'f3ng g\'f3i style l\f2\lang1066\u7841?i, ch\u7881? c\f0\lang1033\'f3 t\'e1c d\f2\lang1066\u7909?ng v\u7899?i nh\u7919?ng element t\u7891?n t\u7841?i trong component \f1\'f0\f0\lang1033\'f3 m\'e0 th\'f4i. Tuy nhi\'ean, kh\'f4ng ph\f2\lang1066\u7843?i browser n\f0\lang1033\'e0o c\f1\u361?ng cung c\f2\lang1066\u7845?p c\f1\u417? ch\f2\u7871? \f1\'f0\f0\lang1033\'f3. M\f2\lang1066\u7863?c \f1\'f0\f2\u7883?nh, Angular s\u7869? c\f0\lang1033\'f3 m\f2\lang1066\u7897?t c\f0\lang1033\'e1ch ri\'eang \f1\'f0\f2\lang1066\u7875? b\u7855?t ch\f1\u432?\f2\u7899?c (emulated) c\f1\u417? ch\f2\u7871? Shadow DOM cho t\u7845?t c\u7843? component, b\u7857?ng c\f0\lang1033\'e1ch \f1\'f0\f2\lang1066\u7883?nh ngh\f1\u297?a thu\f2\u7897?c t\f0\lang1033\'ednh encapsulation trong decorator @Component:\par
+\f4\fs20   @Component(\{\par
+    selector: "component-name",\par
+    encapsulation: ViewEncapsulation.Emulated\par
+  \})\par
+\f0\fs22   C\'f3 3 option: Emulated (m\f2\lang1066\u7863?c \f1\'f0\f2\u7883?nh - Angular s\u7869? th\f0\lang1033\'eam custom attribute v\'e0o c\'e1c element c\f2\lang1066\u7911?a m\u7895?i component \f1\'f0\f2\u7875? \f1\'f0\f0\lang1033\'e1nh d\f2\lang1066\u7845?u ph\f0\lang1033\'e2n bi\f2\lang1066\u7879?t t\u7915?ng component v\u7899?i nhau), Native (s\u7917? d\u7909?ng Shadow DOM c\u7911?a tr\f0\lang1033\'ecnh duy\f2\lang1066\u7879?t), None (kh\f0\lang1033\'f4ng c\'f3 g\'ec c\f2\lang1066\u7843? - c\f0\lang1033\'e1c style s\f2\lang1066\u7869? bleeding out v\f0\lang1033\'e0 \f1\'f0\f0\'e8 l\f2\lang1066\u7851?n nhau)\par
+\par
+\b\i Event Binding\par
+\b0\i0\f3\fs20   e.g: <button (onclick)="buttonOnClick($event)">Click</button>\par
+\f2\fs22   Trong file component.ts, \f1\'f0\f2\u7883?nh ngh\f1\u297?a h\f0\lang1033\'e0m buttonOnClick() nh\f2\lang1066\u7853?n $event l\f0\lang1033\'e0 tham s\f2\lang1066\u7889? \f1\'f0\f2\u7847?u v\f0\lang1033\'e0o\par
+\par
+\b\i Event Bubbling\par
+\b0\i0   V\'ed d\f2\lang1066\u7909? n\u7871?u c\f0\lang1033\'f3 m\f2\lang1066\u7897?t div l\u7891?ng ngo\f0\lang1033\'e0i button, khi click button th\'ec event onClick n\'e0y s\f2\lang1066\u7869? xu\u7845?t hi\u7879?n tr\f0\lang1033\'ean c\f2\lang1066\u7843? th\u7867? div (event bubbling), do \f1\'f0\f0\lang1033\'f3 \f1\'f0\f2\lang1066\u7875? ch\u7863?n chuy\u7879?n n\f0\lang1033\'e0y, trong h\'e0m handler c\f2\lang1066\u7911?a button, g\u7885?i l\u7879?nh $event.stopPropagation();\par
+\par
+\b\i Event Filtering\par
+\b0\i0   V\f0\lang1033\'ed d\f2\lang1066\u7909? mu\u7889?n b\u7855?t event khi nh\u7845?n enter, th\f0\lang1033\'f4ng th\f1\u432?\f2\lang1066\u7901?ng ta l\f0\lang1033\'e0m: bind event keyup, ki\f2\lang1066\u7875?m tra object event \f1\'f0\f2\u7875? l\u7845?y keyCode so xem c\f0\lang1033\'f3 b\f2\lang1066\u7857?ng 13 hay kh\f0\lang1033\'f4ng v\'e0 th\f2\lang1066\u7921?c hi\u7879?n function c\u7847?n l\f0\lang1033\'e0m. Trong Angular s\f2\lang1066\u7917? d\u7909?ng syntax \f1\'f0\u417?n gi\f2\u7843?n h\f1\u417?n \'f0\f2\u7875? th\u7921?c hi\u7879?n \f1\'f0i\f2\u7873?u \f1\'f0\f0\lang1033\'f3:\par
+\f4\fs20   e.g: <input (keyup.enter)="handleInputEnter()" />\par
+\f0\fs22\par
+\b\i Template Variables (with input control)\par
+\b0\i0   Khi mu\f2\lang1066\u7889?n l\u7845?y gi\f0\lang1033\'e1 tr\f2\lang1066\u7883? t\u7915? c\f0\lang1033\'e1c input control, c\'f3 th\f2\lang1066\u7875? d\f0\lang1033\'f9ng template variable, khai b\'e1o b\f2\lang1066\u7903?i syntax #variable\par
+\f3\fs20   e.g: <input #email (keyup.enter)="handleEmail(email.value)" />\par
+\f2\fs22   V\f0\lang1033\'e0 khai b\'e1o method handleEmail(email) v\f2\lang1066\u7899?i email ch\f0\lang1033\'ednh l\'e0 gi\'e1 tr\f2\lang1066\u7883? text value c\u7911?a input.\par
+\par
+\par
+\b\fs28 2. Two-way Binding\par
+\b0\fs22 Ng\u7919? c\u7843?nh s\u7917? d\u7909?ng t\f1\u432?\u417?ng t\f2\u7921? tr\f1\u432?\f2\u7901?ng h\u7907?p "Template Variables", ngh\f1\u297?a l\f0\lang1033\'e0 khi ta mu\f2\lang1066\u7889?n thay \f1\'f0\f2\u7893?i UI (e.g nh\u7853?p data v\f0\lang1033\'e0o input) th\'ec c\'e1c bi\f2\lang1066\u7871?n (variable) b\f0\lang1033\'ean d\f1\u432?\f2\lang1066\u7899?i c\f1\u361?ng thay \'f0\f2\u7893?i theo.\par
+\par
+\b\i C\f0\lang1033\'e1ch 1: D\'f9ng l\f2\lang1066\u7879?nh gh\f0\lang1033\'e9p\par
+\b0\i0\f4\fs20   <input [value]="email" (keyup.enter)="email = $event.target.value; handleEmail();" />\par
+\f0\fs22\par
+\b\i C\'e1ch 2: D\'f9ng ngModel - t\'ednh n\f1\'e3ng khi\f2\lang1066\u7871?n Angular kh\f0\lang1033\'e1c bi\f2\lang1066\u7879?t so v\u7899?i React\par
+\b0   \ul 2.1 Import FormsModule v\f0\lang1033\'e0o trong app.module.ts\par
+\ulnone\i0\f4\fs20     import \{ FormsModule \} from '@angular/forms';\par
+    ...\par
+    @NgModule(\{\par
+      imports: [\par
+        FormsModule\par
+      ]\par
+    \})\par
+\i\f0\fs22   \ul 2.2 D\'f9ng c\'fa ph\'e1p "Banana () in the Box [] => [()]"\par
+\ulnone\i0\f4\fs20     <input [(ngModel)]="email" (keyup.enter)="handleEmail()" />\par
+\f0\fs22\par
+\par
+\b\fs28 3. Pipes |\par
+\b0\fs22 T\f1\u432?\u417?ng t\f2\lang1066\u7921? trong l\u7879?nh Unix, s\u7917? d\u7909?ng pipe \f1\'f0\f2\u7875? n\u7889?i c\f0\lang1033\'e1c c\'e2u l\f2\lang1066\u7879?nh v\u7899?i nhau.\par
+V\f0\lang1033\'ed d\f2\lang1066\u7909?:\par
+\f3\fs20\{\{ course.title | uppercase | lowercase \}\}\par
+\{\{ course.totalStudents | number \}\}\par
+\{\{ course.rating | number:'2.2-2' \}\}\par
+\{\{ course.price | currency:'AUD':true:'3.2-2' \}\}\par
+\{\{ course.releaseDate | date:'shortDate' \}\}\par
+\f2\fs22\par
+\b\i\f3\fs20 before:                                    after:\par
+\b0\i0 The Complete Angular Course                the complete angular course\par
+30123                                      \f4\lang1033 3\f3\lang1066 0,123\par
+4.975                                 \f4\lang1033      \f3\lang1066 04.97\par
+190.95                                     A$190.95\par
+Fri Apr 01 2016 00:00:00 GMT-0700 (PDT)    4/1/2016\par
+\f2\fs22\par
+\par
+\b\fs28 4. Component API\par
+\i\fs22 4.1. Input: gi\u7889?ng nh\f1\u432? prop b\f0\lang1033\'ean React - l\'e0 custom property c\f2\lang1066\u7911?a m\u7897?t component truy\u7873?n t\u7915? b\f0\lang1033\'ean ngo\'e0i v\'e0o\par
+\b0\i0   S\f2\lang1066\u7917? d\u7909?ng decorator @Input()\par
+\f3\fs20   export class MyInput \{\par
+    @Input() value: string;\par
+  \}\par
+  <my-input [value]="data.value" />\par
+\f2\fs22\par
+\b\i 4.2 Output: gi\u7889?ng nh\f1\u432? prop nh\u432?ng d\f0\lang1033\'e0nh \f1\'f0\f2\lang1066\u7875? register event only (b\f0\lang1033\'ean React \f1\'f0\u417?n gi\f2\lang1066\u7843?n h\f1\u417?n, t\f2\u7845?t c\u7843? \f1\'f0\f2\u7873?u l\f0\lang1033\'e0 prop)\b0\i0\par
+  S\f2\lang1066\u7917? d\u7909?ng decorator @Output()\par
+\f3\fs20   export class MyInput \{\par
+    @Input() value: string;\par
+    @Output() change = new EventEmitter();\par
+\par
+    someFunction() \{\par
+      this.change.emit();\tab // T\u7841?i m\u7897?t function n\f4\lang1033\'e0o \f5\'f0\f4\'f3, g\f3\lang1066\u7885?i emit() \f5\'f0\f3\u7875? trigger event "change"\par
+    \}\par
+  \}\par
+  <my-input [value]="data.value" (change)="handleChange()" />\par
+\f2\fs22\par
+\par
+\b\fs28 5. ngContent (t\f1\u432?\u417?ng t\f2\u7921? children trong React)\par
+\b0\fs22   D\f0\lang1033\'f9ng \f1\'f0\f2\lang1066\u7875? pass HTML content v\f0\lang1033\'e0o b\'ean trong m\f2\lang1066\u7897?t component b\u7845?t k\f0\lang1033\'ec\par
+\f4\fs20   <my-container>\par
+    <div>Hello World</div>\par
+  </my-container>\par
+  ====================\par
+  //my-container.component.html\par
+  <div>\par
+    <ng-content></ng-content>\par
+  </div>\par
+  ====================\par
+  // output b\'ean ngo\'e0i browser\par
+  <div>\par
+    <div>Hello World<div>\par
+  </div>\par
+\f0\fs22\par
+  N\f2\lang1066\u7871?u c\f0\lang1033\'f3 nhi\f2\lang1066\u7873?u h\f1\u417?n 1 ng-content, s\f2\u7917? d\u7909?ng attr "select" \f1\'f0\f2\u7875? select HTML element theo m\u7863?c \f1\'f0\f2\u7883?nh nh\f1\u432? theo ID (#id), theo class (.class), v.v\par
+\f5\fs20   <div>\par
+    <ng-content select=".header"></ng-content>\par
+    <br />\par
+    <ng-content select=".body"></ng-content>\par
+  </div>\par
+\f1\fs22\par
+  N\f2\u7871?u ch\u7881? mu\u7889?n replace b\u7857?ng m\u7897?t \f1\'f0o\f2\u7841?n v\f1\'e3n b\f2\u7843?n th\f0\lang1033\'f4ng th\f1\u432?\f2\lang1066\u7901?ng (plain text) thay v\f0\lang1033\'ec m\f2\lang1066\u7897?t HTML element, d\f0\lang1033\'f9ng th\f2\lang1066\u7867? ng-container.\par
+\f3\fs20   <my-container>\par
+    <ng-container>Hello World</ng-container>\par
+  </my-container>\par
+  ====================\par
+  //my-container.component.html\par
+  <div>\par
+    <ng-content></ng-content>\par
+  </div>\par
+  ====================\par
+  // output b\f4\lang1033\'ean ngo\'e0i browser\par
+  <div>\par
+    Hello World\par
+  </div>\par
+\f0\fs22\par
+\par
+\b\fs28 6. Directives\par
+\ul\fs22 STRUCTURAL\ulnone\b0 : Modify the structure of the DOM. (must add an asterisk * as prefix - Angular will rewrite the code using ng-template with directive as binding attribute such as <ng-template [ngIf]="course.length == 0">)\par
+\ul\b ATTRIBUTE\ulnone\b0 : Modify the attributes of the DOM elements.\par
+\par
+\b\i 6.1. ngFor\par
+\b0\i0\f4\fs20   <ul>\par
+    <li *ngFor="let course of courses; index as i">\par
+      \{\{ i \}\} - \{\{ course.name \}\}\par
+      <button (click)="onRemove(course)">Remove</button>\par
+    </li>\par
+  </ul>\par
+  ====================\par
+  onRemove(course) \{\par
+    let index = this.courses.indexOf(course);\par
+    this.courses.splice(index, 1);\par
+  \}\par
+\f0\fs22\par
+\ul\i 6.1.a ngFor - trackBy\par
+\ulnone\i0   T\f1\u432?\u417?ng t\f2\lang1066\u7921? React, Angular c\f0\lang1033\'f3 c\f1\u417? ch\f2\lang1066\u7871? \f1\'f0\f2\u7875? track c\f0\lang1033\'e1c entity trong m\f2\lang1066\u7897?t list \f1\'f0\u432?\f2\u7907?c render ra b\u7857?ng ID c\u7911?a n\f0\lang1033\'f3. N\f2\lang1066\u7871?u kh\f0\lang1033\'f4ng cung c\f2\lang1066\u7845?p ID, th\f0\lang1033\'ec Angular lu\'f4n render l\f2\lang1066\u7841?i c\f0\lang1033\'e1c list object cho d\'f9 n\f2\lang1066\u7897?i dung c\f0\lang1033\'e1c object kh\'f4ng thay \f1\'f0\f2\lang1066\u7893?i. N\u7871?u cung c\u7845?p ID, Angular s\u7869? ki\u7875?m tra n\u7871?u n\u7897?i dung object kh\f0\lang1033\'f4ng thay \f1\'f0\f2\lang1066\u7893?i th\f0\lang1033\'ec kh\'f4ng c\f2\lang1066\u7847?n ph\u7843?i render l\u7841?i c\f0\lang1033\'e2y DOM.\par
+\f4\fs20   <ul>\par
+    <li *ngFor="let course of courses; trackBy: trackCourse">\par
+      \{\{ course.name \}\}\par
+    </li>\par
+  </ul>\par
+  ====================\par
+  trackCourse(index, course) \{\par
+    return course ? course.id : undefined;\par
+  \}\par
+\f0\fs22\par
+\b\i 6.2. ngIf\par
+\b0\i0\f4\fs20   <div *ngIf="courses.length > 0; then courseList else noCourse"></div>\par
+  <ng-template #courseList>\par
+    List of courses:\par
+  </ng-template>\par
+  <ng-template #noCourse>\par
+    No course found.\par
+  </ng-template>\par
+\f0\fs22\par
+\b\i 6.3. ngSwitch - ngSwitchCase - ngSwitchDefault\par
+\b0\i0\f4\fs20   <div [ngSwitch]="viewMode">\par
+    <div *ngSwitchCase="'map'">Map view content</div>\par
+    <div *ngSwitchCase="'list'">List view content</div>\par
+    <div *ngSwitchDefault>Otherwise</div>\par
+  </div>\par
+\f0\fs22\par
+\b\i 6.4. ngClass (ATTRIBUTE Directive)\par
+\b0\i0\f4\fs20   <span\par
+    [class.glyphicon-star]="isSelected"\par
+    [class.glyphicon-star-empty]="!isSelected"\par
+  ></span>\par
+\f0\fs22   C\'f3 th\f2\lang1066\u7875? d\f0\lang1033\'f9ng ngClass \f1\'f0\f2\lang1066\u7875? vi\u7871?t l\u7841?i nh\f1\u432? sau:\par
+\f5\fs20   <span\par
+    [ngClass]="\{\par
+      'glyphicon-star': isSelected,\par
+      'glyphicon-star-empty': !isSelected\par
+    \}"\par
+  ></span>\par
+\f1\fs22\par
+\b\i 6.5. ngStyle (ATTRIBUTE Directive - t\u432?\u417?ng t\f2\u7921? ngClass)\par
+\b0\i0\f3\fs20   <button\par
+    [style.backgroundColor]="canSave ? 'blue' : 'gray' "\par
+    [style.color]="canSave ? 'white' : 'black' "\par
+  ></button>\par
+\f2\fs22   C\f0\lang1033\'f3 th\f2\lang1066\u7875? d\f0\lang1033\'f9ng ngStyle \f1\'f0\f2\lang1066\u7875? vi\u7871?t l\u7841?i nh\f1\u432? sau:\par
+\f5\fs20   <button\par
+    [ngStyle]="\{\par
+      'backgroundColor': canSave ? 'blue' : 'gray',\par
+      'color': canSave ? 'white' : 'black'\par
+    \}"\par
+  ></button>\par
+\f1\fs22\par
+\par
+\b\fs28 7. Global Error Handler\par
+\b0\fs22   M\f2\u7863?c \f1\'f0\f2\u7883?nh m\u7885?i error \f1\'f0\u432?\f2\u7907?c throw ra s\u7869? \f1\'f0\u432?\f2\u7907?c log ra console. \f1\'d0\f2\u7875? thay \f1\'f0\f2\u7893?i handler m\u7863?c \f1\'f0\f2\u7883?nh c\u7911?a app, t\u7841?o m\u7897?t class implement ErrorHandler v\u7899?i h\f0\lang1033\'e0m handleError(error) \{\}, sau \f1\'f0\f0\'f3 thay \f1\'f0\f2\lang1066\u7893?i trong AppModule provider th\f0\lang1033\'e0nh\par
+\f4\fs20   providers: [\par
+    \{ provide: ErrorHandler, useClass: CustomErrorHandler \}\par
+  ]\f0\fs22\par
+\par
+\par
+\b\fs28 8. Router\par
+\i\fs22 8.1. Config router trong app.module.ts\par
+\b0\i0\f4\fs20   imports: [\par
+    RouterModule.forRoot([\par
+      \{ path: "", component: HomeComponent \},\par
+      \{ path: "followers/:username", component: GithubProfileComponent \},\par
+      \{ path: "followers", component: GithubFollowersComponent \},\par
+      \{ path: "posts", component: PostComponent \},\par
+      \{ path: "**", component: NotfoundComponent \},\par
+    ]),\par
+  ],\par
+\f0\fs22\par
+\b\i 8.2. Th\'eam <router-outlet></router-outlet> trong app.component.html (file HTML main)\par
+\b0\i0\f4\fs20   <app-navbar></app-navbar>\par
+  <br/>\par
+  <router-outlet></router-outlet>\par
+\f0\fs22   M\f2\lang1066\u7885?i Component config trong app.module t\f0\lang1033\'f9y theo path URL s\f2\lang1066\u7869? \f1\'f0\u432?\f2\u7907?c render ngay B\f0\lang1033\'caN D\f1\u431?\f2\lang1066\u7898?I router-outlet, navbar n\u7857?m tr\f0\lang1033\'ean router-outlet n\'ean gi\f2\lang1066\u7919? nguy\f0\lang1033\'ean n\'ean do \f1\'f0\f0\'f3, ch\'fang ta d\'f9ng c\f2\lang1066\u7845?u tr\f0\lang1033\'fac n\'e0y \f1\'f0\f2\lang1066\u7875? render cho m\u7885?i URL v\u7851?n th\u7845?y \f1\'f0\u432?\f2\u7907?c navbar.\par
+\par
+\b\i 8.3. navigate - d\f0\lang1033\'f9ng code (router.navigate) ho\f2\lang1066\u7863?c d\f0\lang1033\'f9ng html (routerLink, queryParams)\par
+\b0\i0   D\'f9ng code: \par
+\f4\fs20   constructor(private router: Router) \{\}\par
+  goBack() \{\par
+    this.router.navigate(["/followers"], \{\par
+      queryParams: \{ page: 1 \},\par
+    \});\par
+  \}\f0\fs22\par
+\par
+  D\'f9ng HTML:\par
+\f4\fs20   <a\par
+    [routerLink]="['/followers', follower.username]"\par
+    [queryParams]="\{ id: follower.id \}"\par
+  >\par
+    View Detail\par
+  </a>\par
+\f0\fs22\par
+\par
+\b\fs28 9. AuthGuard\par
+\b0\fs22   D\'f9ng \f1\'f0\f2\lang1066\u7875? protect router d\u7921?a tr\f0\lang1033\'ean quy\f2\lang1066\u7873?n c\u7911?a user - v\f0\lang1033\'ed d\f2\lang1066\u7909? n\u7871?u user kh\f0\lang1033\'f4ng c\'f3 quy\f2\lang1066\u7873?n admin th\f0\lang1033\'ec kh\'f4ng \f1\'f0\u432?\f2\lang1066\u7907?c route \f1\'f0\f2\u7871?n url "/admin"\par
+\b\i 9.1 T\u7841?o class AuthGuard implement interface CanActivate v\u7899?i method canActivate tr\u7843? v\u7873? true (\f1\'f0\u432?\f2\u7907?c route \f1\'f0\f2\u7871?n url \f1\'f0\f0\lang1033\'f3) ho\f2\lang1066\u7863?c navigate \f1\'f0\f2\u7871?n m\u7897?t url kh\f0\lang1033\'e1c v\'e0 tr\f2\lang1066\u7843? v\u7873? false.\par
+\b0\i0\f3\fs20   \par
+\f4\lang1033   \f3\lang1066 export class AuthGuard implements CanActivate \{\par
+    constructor(private router: Router, private authService: AuthService) \{\}\par
+    canActivate() \{\par
+      if (this.authService.isLoggedIn()) return true;\par
+      \par
+      this.router.navigate(["/login"]);\par
+      return false;\par
+    \}\par
+  \}\par
+\f2\fs22\par
+\b\i 9.2 Modify l\u7841?i trong ph\u7847?n import c\u7911?a RouteModule, th\f0\lang1033\'eam v\'e0o property canActivate k\'e8m theo m\f2\lang1066\u7897?t array c\f0\lang1033\'e1c class AuthGuard c\f2\lang1066\u7911?a Component \f1\'f0\f0\lang1033\'f3.\par
+\b0\i0\f4\fs20   \par
+  imports: [\par
+    RouterModule.forRoot([\par
+      \{ \par
+        path: "admin", \par
+        component: AdminComponent,\par
+        canActivate: [AuthGuard]\par
+      \},\par
+  ]\lang9\par
+}
+ 

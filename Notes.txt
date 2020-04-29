@@ -1,0 +1,283 @@
+ANGULAR FUNDAMENTAL
+
+1. One-way Binding:
+Dùng data load lên các HTML component, nhưng thay đổi component trên UI (e.g: nhập một giá trị gì đó vào input) thì data (biến) bên dưới code không đổi.
+
+String Interpolation
+  syntax: "{{ variable }}"
+  e.g: <img url="{{ imageUrl }}" />
+
+Property Binding 
+  syntax: [property]="variable"
+  e.g: <img [url]="imageUrl" />
+
+Attribute Binding
+  Phân biệt HTML và DOM: HTML là thể hiện của DOM dưới dạng text - HTML là markup language, DOM là thứ tồn tại dưới bộ nhớ. Do đó mỗi property của HTML sẽ map với 1 property tương ứng của DOM, nhưng vì hai thứ này (HTML & DOM) không phải là một, nên có những trường hợp ngoại lệ HTML có property này nhưng DOM không có property tương ứng. Do đó không thể binding bằng "Property Binding" hay "String Interpolation" được, mà phải dùng syntax đặc biệt: thêm tiền tố "attr." vào trước tên property
+  e.g: <table><tr><td [colspan]="colspan"> column </td></tr></table>   ERROR!!
+       <table><tr><td [attr.colspan]="colspan"> column </td></tr></table>   CORRECT
+
+Class Binding
+  e.g: <button class="btn btn-primary" [class.active]="true">Save</button>
+       sẽ được render thành <button class="btn btn-primary active">Save</button>
+
+Style Binding
+  e.g: <div [style.backgroundColor]="isCorrect ? 'green' : 'red'"/>
+
+Shadow DOM - ViewEncapsulation:
+  Nếu một component định nghĩa style ngay trong file html của nó bằng thẻ <style>, theo cơ chế thông thường, style đó sẽ bị "rò rỉ" (bleeding) ra bên ngoài - nghĩa là những element của component khác cũng sẽ bị dính style đó nếu có cùng selector. Một số browser cung cấp cơ chế "Shadow DOM" để đóng gói style lại, chỉ có tác dụng với những element tồn tại trong component đó mà thôi. Tuy nhiên, không phải browser nào cũng cung cấp cơ chế đó. Mặc định, Angular sẽ có một cách riêng để bắt chước (emulated) cơ chế Shadow DOM cho tất cả component, bằng cách định nghĩa thuộc tính encapsulation trong decorator @Component:
+  @Component({
+    selector: "component-name",
+    encapsulation: ViewEncapsulation.Emulated
+  })
+  Có 3 option: Emulated (mặc định - Angular sẽ thêm custom attribute vào các element của mỗi component để đánh dấu phân biệt từng component với nhau), Native (sử dụng Shadow DOM của trình duyệt), None (không có gì cả - các style sẽ bleeding out và đè lẫn nhau)
+
+Event Binding
+  e.g: <button (onclick)="buttonOnClick($event)">Click</button>
+  Trong file component.ts, định nghĩa hàm buttonOnClick() nhận $event là tham số đầu vào
+
+Event Bubbling
+  Ví dụ nếu có một div lồng ngoài button, khi click button thì event onClick này sẽ xuất hiện trên cả thẻ div (event bubbling), do đó để chặn chuyện này, trong hàm handler của button, gọi lệnh $event.stopPropagation();
+
+Event Filtering
+  Ví dụ muốn bắt event khi nhấn enter, thông thường ta làm: bind event keyup, kiểm tra object event để lấy keyCode so xem có bằng 13 hay không và thực hiện function cần làm. Trong Angular sử dụng syntax đơn giản hơn để thực hiện điều đó:
+  e.g: <input (keyup.enter)="handleInputEnter()" />
+
+Template Variables (with input control)
+  Khi muốn lấy giá trị từ các input control, có thể dùng template variable, khai báo bởi syntax #variable
+  e.g: <input #email (keyup.enter)="handleEmail(email.value)" />
+  Và khai báo method handleEmail(email) với email chính là giá trị text value của input.
+
+
+2. Two-way Binding
+Ngữ cảnh sử dụng tương tự trường hợp "Template Variables", nghĩa là khi ta muốn thay đổi UI (e.g nhập data vào input) thì các biến (variable) bên dưới cũng thay đổi theo.
+
+Cách 1: Dùng lệnh ghép
+  <input [value]="email" (keyup.enter)="email = $event.target.value; handleEmail();" />
+
+Cách 2: Dùng ngModel - tính năng khiến Angular khác biệt so với React
+  2.1 Import FormsModule vào trong app.module.ts
+    import { FormsModule } from '@angular/forms';
+    ...
+    @NgModule({
+      imports: [
+        FormsModule
+      ]
+    })
+  2.2 Dùng cú pháp "Banana () in the Box [] => [()]"
+    <input [(ngModel)]="email" (keyup.enter)="handleEmail()" />
+
+
+3. Pipes |
+Tương tự trong lệnh Unix, sử dụng pipe để nối các câu lệnh với nhau.
+Ví dụ:
+{{ course.title | uppercase | lowercase }}
+{{ course.totalStudents | number }}
+{{ course.rating | number:'2.2-2' }}
+{{ course.price | currency:'AUD':true:'3.2-2' }}
+{{ course.releaseDate | date:'shortDate' }}
+
+before:                                     after:
+The Complete Angular Course                 the complete angular course
+30123                                       30,123
+4.975                                       04.97
+190.95                                      A$190.95
+Fri Apr 01 2016 00:00:00 GMT-0700 (PDT)     4/1/2016
+
+
+4. Component API
+4.1. Input: giống như prop bên React - là custom property của một component truyền từ bên ngoài vào
+  Sử dụng decorator @Input()
+  export class MyInput {
+    @Input() value: string;
+  }
+  <my-input [value]="data.value" />
+
+4.2 Output: giống như prop nhưng dành để register event only (bên React đơn giản hơn, tất cả đều là prop)
+  Sử dụng decorator @Output()
+  export class MyInput {
+    @Input() value: string;
+    @Output() change = new EventEmitter();
+
+    someFunction() {
+      this.change.emit();	// Tại một function nào đó, gọi emit() để trigger event "change"
+    }
+  }
+  <my-input [value]="data.value" (change)="handleChange()" />
+
+
+5. ngContent (tương tự children trong React)
+  Dùng để pass HTML content vào bên trong một component bất kì
+  <my-container>
+    <div>Hello World</div>
+  </my-container>
+  ====================
+  //my-container.component.html
+  <div>
+    <ng-content></ng-content>
+  </div>
+  ====================
+  // output bên ngoài browser
+  <div>
+    <div>Hello World<div>
+  </div>
+
+  Nếu có nhiều hơn 1 ng-content, sử dụng attr "select" để select HTML element theo mặc định như theo ID (#id), theo class (.class), v.v
+  <div>
+    <ng-content select=".header"></ng-content>
+    <br />
+    <ng-content select=".body"></ng-content>
+  </div>
+
+  Nếu chỉ muốn replace bằng một đoạn văn bản thông thường (plain text) thay vì một HTML element, dùng thẻ ng-container.
+  <my-container>
+    <ng-container>Hello World</ng-container>
+  </my-container>
+  ====================
+  //my-container.component.html
+  <div>
+    <ng-content></ng-content>
+  </div>
+  ====================
+  // output bên ngoài browser
+  <div>
+    Hello World
+  </div>
+
+
+6. Directives
+STRUCTURAL: Modify the structure of the DOM. (must add an asterisk * as prefix - Angular will rewrite the code using ng-template with directive as binding attribute such as <ng-template [ngIf]="course.length == 0">)
+ATTRIBUTE: Modify the attributes of the DOM elements.
+
+6.1. ngFor
+  <ul>
+    <li *ngFor="let course of courses; index as i">
+      {{ i }} - {{ course.name }}
+      <button (click)="onRemove(course)">Remove</button>
+    </li>
+  </ul>
+  ====================
+  onRemove(course) {
+    let index = this.courses.indexOf(course);
+    this.courses.splice(index, 1);
+  }
+
+6.1.a ngFor - trackBy
+  Tương tự React, Angular có cơ chế để track các entity trong một list được render ra bằng ID của nó. Nếu không cung cấp ID, thì Angular luôn render lại các list object cho dù nội dung các object không thay đổi. Nếu cung cấp ID, Angular sẽ kiểm tra nếu nội dung object không thay đổi thì không cần phải render lại cây DOM.
+  <ul>
+    <li *ngFor="let course of courses; trackBy: trackCourse">
+      {{ course.name }}
+    </li>
+  </ul>
+  ====================
+  trackCourse(index, course) {
+    return course ? course.id : undefined;
+  }
+
+6.2. ngIf
+  <div *ngIf="courses.length > 0; then courseList else noCourse"></div>
+  <ng-template #courseList>
+    List of courses:
+  </ng-template>
+  <ng-template #noCourse>
+    No course found.
+  </ng-template>
+
+6.3. ngSwitch - ngSwitchCase - ngSwitchDefault
+  <div [ngSwitch]="viewMode">
+    <div *ngSwitchCase="'map'">Map view content</div>
+    <div *ngSwitchCase="'list'">List view content</div>
+    <div *ngSwitchDefault>Otherwise</div>
+  </div>
+
+6.4. ngClass (ATTRIBUTE Directive)
+  <span
+    [class.glyphicon-star]="isSelected"
+    [class.glyphicon-star-empty]="!isSelected"
+  ></span>
+  Có thể dùng ngClass để viết lại như sau:
+  <span
+    [ngClass]="{
+      'glyphicon-star': isSelected,
+      'glyphicon-star-empty': !isSelected
+    }"
+  ></span>
+
+6.5. ngStyle (ATTRIBUTE Directive - tương tự ngClass)
+  <button
+    [style.backgroundColor]="canSave ? 'blue' : 'gray' "
+    [style.color]="canSave ? 'white' : 'black' "
+  ></button>
+  Có thể dùng ngStyle để viết lại như sau:
+  <button
+    [ngStyle]="{
+      'backgroundColor': canSave ? 'blue' : 'gray',
+      'color': canSave ? 'white' : 'black'
+    }"
+  ></button>
+
+
+7. Global Error Handler
+  Mặc định mọi error được throw ra sẽ được log ra console. Để thay đổi handler mặc định của app, tạo một class implement ErrorHandler với hàm handleError(error) {}, sau đó thay đổi trong AppModule provider thành
+  providers: [
+    { provide: ErrorHandler, useClass: CustomErrorHandler }
+  ]
+
+
+8. Router
+8.1. Config router trong app.module.ts
+  imports: [
+    RouterModule.forRoot([
+      { path: "", component: HomeComponent },
+      { path: "followers/:username", component: GithubProfileComponent },
+      { path: "followers", component: GithubFollowersComponent },
+      { path: "posts", component: PostComponent },
+      { path: "**", component: NotfoundComponent },
+    ]),
+  ],
+
+8.2. Thêm <router-outlet></router-outlet> trong app.component.html (file HTML main)
+  <app-navbar></app-navbar>
+  <br/>
+  <router-outlet></router-outlet>
+  Mọi Component config trong app.module tùy theo path URL sẽ được render ngay BÊN DƯỚI router-outlet, navbar nằm trên router-outlet nên giữ nguyên nên do đó, chúng ta dùng cấu trúc này để render cho mọi URL vẫn thấy được navbar.
+
+8.3. navigate - dùng code (router.navigate) hoặc dùng html (routerLink, queryParams)
+  Dùng code: 
+  constructor(private router: Router) {}
+  goBack() {
+    this.router.navigate(["/followers"], {
+      queryParams: { page: 1 },
+    });
+  }
+
+  Dùng HTML:
+  <a
+    [routerLink]="['/followers', follower.username]"
+    [queryParams]="{ id: follower.id }"
+  >
+    View Detail
+  </a>
+
+
+9. AuthGuard
+  Dùng để protect router dựa trên quyền của user - ví dụ nếu user không có quyền admin thì không được route đến url "/admin"
+9.1 Tạo class AuthGuard implement interface CanActivate với method canActivate trả về true (được route đến url đó) hoặc navigate đến một url khác và trả về false.
+  export class AuthGuard implements CanActivate {
+    constructor(private router: Router, private authService: AuthService) {}
+    canActivate() {
+      if (this.authService.isLoggedIn()) return true;
+      
+      this.router.navigate(["/login"]);
+      return false;
+    }
+  }
+
+9.2 Modify lại trong phần import của RouteModule, thêm vào property canActivate kèm theo một array các class AuthGuard của Component đó.
+  imports: [
+    RouterModule.forRoot([
+      { 
+        path: "admin", 
+        component: AdminComponent,
+        canActivate: [AuthGuard]
+      },
+  ]
