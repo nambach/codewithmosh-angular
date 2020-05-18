@@ -1,5 +1,5 @@
 {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset238 Calibri;}{\f2\fnil\fcharset163 Calibri;}{\f3\fnil\fcharset163 Consolas;}{\f4\fnil\fcharset0 Consolas;}{\f5\fnil\fcharset238 Consolas;}}
-{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+{\*\generator Riched20 10.0.17763}\viewkind4\uc1 
 \pard\sl240\slmult1\qc\b\f0\fs32\lang9 ANGULAR FUNDAMENTAL\par
 
 \pard\sl240\slmult1\b0\fs22\par
@@ -288,6 +288,64 @@ Fri Apr 01 2016 00:00:00 GMT-0700 (PDT)    4/1/2016\par
         component: AdminComponent,\par
         canActivate: [AuthGuard]\par
       \},\par
-  ]\lang9\par
+  ]\par
+\b\f0\fs28\par
+10. Reactive Form\par
+\i\fs22\lang9 10.1 Import module c\f2\lang1066\u7911?\f0\lang9 a FormsModule v\'e0 ReactiveFormsModule\par
+\par
+10.2 Khai b\'e1o property form trong file typescript component\par
+\b0\i0\f4\fs20   \par
+  form = new FormGroup(\{\par
+    username: new FormControl(\par
+      "", //Gi\'e1 tr\f3\lang1066\u7883?\f4\lang9  init\par
+      [Validators.required, Validators.minLength(3), UsernameValidator.nospace], //C\'e1c validator th\'f4ng th\f5\u432?\f3\lang1066\u7901?\f4\lang1033 ng\lang9\par
+      UsernameValidator.unique //C\'e1c validator async (c\'f3 call API)\par
+    ),\par
+    password: new FormControl("", Validators.required),\par
+\par
+    dob: new FormGroup(\{\par
+      birthDay: new FormControl(),\par
+      birthMonth: new FormControl(),\par
+      birthYear: new FormControl(),\par
+    \}),\par
+  \});\par
+\par
+\b\i\f0\fs22 10.3 G\f2\lang1066\u7855?\f0\lang1033 n c\'e1c directive t\f1\u432?\u417?\f0 ng \f2\lang1066\u7913?\f0\lang1033 ng v\'e0o HTML element trong file .html\par
+\b0\i0   G\f2\lang1066\u7855?\f0\lang1033 n theo quy t\f2\lang1066\u7855?\f0\lang1033 c: n\f2\lang1066\u7871?\f0\lang1033 u l\'e0 FormGroup th\'ec g\f2\lang1066\u7855?\f0\lang1033 n \b formGroupName\b0 ="<t\'ean bi\f2\lang1066\u7871?\f0\lang1033 n group>", n\f2\lang1066\u7871?\f0\lang1033 u l\'e0 FormControl th\'ec g\f2\lang1066\u7855?\f0\lang1033 n \b formControlName\b0 ="<t\'ean bi\f2\lang1066\u7871?\f0\lang1033 n control>". V\f2\lang1066\u7899?\f0\lang1033 i th\f2\lang1066\u7867?\f0\lang1033  <form></form> th\'ec g\f2\lang1066\u7855?\f0\lang1033 n \b [formGroup]\b0 ="<t\'ean bi\f2\lang1066\u7871?\f0\lang1033 n form>"\par
+\f4\fs20\par
+<form [formGroup]="form" (ngSubmit)="login()">\par
+  <div class="form-group">\par
+    <label for="username">Username</label>\par
+    <input\par
+      formControlName="username"\par
+      id="username"\par
+      type="text"\par
+      class="form-control"\par
+    />\par
+  </div>\par
+  <div class="form-group">\par
+    <label for="password">Password</label>\par
+    <input\par
+      formControlName="password"\par
+      id="password"\par
+      type="text"\par
+      class="form-control"\par
+    />\par
+  </div>\par
+\par
+  <div formGroupName="dob">\par
+    <div class="form-group">\par
+      <label for="birthDay">Day</label>\par
+      <input\par
+        formControlName="birthDay"\par
+        id="birthDay"\par
+        type="text"\par
+        class="form-control"\par
+      />\par
+    </div>\par
+    .....    \par
+  </div>\par
+  <button class="btn btn-primary" type="submit">Sign Up</button>\par
+</form>\lang9\par
 }
  
